@@ -1,0 +1,65 @@
+@import url(button.css);
+@import url(user.css);
+@import url(header.css);
+@import url(body.css);
+
+a {
+    text-decoration: none;
+    line-height: 14px;
+}
+
+.header__auth {
+    flex: 1 0 auto;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 24px;
+
+    a.button {
+        height: 14px;
+    }
+}
+
+.category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category__title {
+    font-size: 32px;
+}
+
+.category__container {
+    flex-grow: 1;
+    max-width: 1000px;
+}
+
+.category__inputs {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        color: #707070;
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
+
+
+
+.category__inputs input {
+    height: 56px;
+    outline: 0px;
+    border: 1px solid #E6E6E6;
+    border-radius: 12px;
+    color: #707070;
+    text-indent: 10px;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.category__inputs label {
+    margin-bottom: 8px;
+}

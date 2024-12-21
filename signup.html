@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Регистрация</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
+    
+    <link rel="stylesheet" href="/css/signup.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <main class="main">
+        <div class="main__signup">
+
+            <div class="main__logo">
+                <a href="./index.html">
+                    <img src="./img/Logo.svg" alt="Логотип">
+                </a>
+            </div>
+
+            <div class="main__inputs">
+                <label for="name">Имя</label>
+                <input class="main__name" type="text" name="name" id="name" placeholder="Введите имя" required>
+                <label for="email">Email</label>
+                <input class="main__email" type="email" name="email" id="email" placeholder="Введите email" required>
+                <label for="password">Пароль</label>
+                <input class="main__password" type="password" name="password" id="password" placeholder="Введите пароль" required>
+            </div>
+
+            <button 
+                class="button button--blue button-stretched main__submit" 
+                type="submit"
+                onclick="submitSignup()"
+            >
+                Зарегистрироваться
+            </button>
+
+            <p class="main__signup-info" >
+                Уже есть аккаунт?
+                <a class="main__signup-link" href="./login.html">Войти</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="/js/signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Создайте категорию</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
+   
+    <link rel="stylesheet" href="/css/create-category.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <a href="./index.html" class="header__logo">
+            <img src="./img/Logo.svg" alt="Логотип" />
+        </a>
+        <nav class="header__nav">
+            <ol class="header__nav-list">
+                <li>
+                    <a 
+                    href="./index.html" 
+                    class="header__nav-link header__nav-link--active"
+                    aria-current="page"
+                    >
+                        Новости
+                    </a>
+                    <a 
+                        href="./categories.html" 
+                        class="header__nav-link"
+                        aria-current="page"
+                    >
+                        Категории
+                    </a>
+                </li>
+            </ol>
+        </nav>
+        <div class="header__auth">
+            <div class="user">
+                <div class="user__avatar">
+                    <img 
+                        src="https://i.pravatar.cc/150?img=12" alt="Аватар"
+                    >
+                </div>
+                <p class="user__name">Администратор</p>
+            </div>
+            <a href="./login.html" class="button button--red button--small">
+                Выйти
+            </a>
+        </div>
+    </header>
+
+    <main class="category">
+        <div class="category__container">
+            <h3 class="category__title">Создание категорий</h3>
+            <div class="category__inputs">
+            
+                <label for="category">Название</label>
+    
+                <input class="category__name" type="text" name="category" id="category" placeholder="Введите название" required>
+    
+            </div>
+    
+            <button 
+                class="button button--blue category__submit" 
+                type="submit"
+                onclick="submitCreateCategory()"
+            >
+                Добавить категорию
+            </button>
+        </div>
+    </main>
+
+    <script src="/js/create-category.js"></script>
+</body>
+</html>

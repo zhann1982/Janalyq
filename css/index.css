@@ -1,0 +1,18 @@
+@import url(button.css);
+@import url(user.css);
+@import url(header.css);
+@import url(news.css);
+@import url(body.css);
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}

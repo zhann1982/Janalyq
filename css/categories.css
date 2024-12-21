@@ -1,0 +1,41 @@
+@import url(button.css);
+@import url(user.css);
+@import url(header.css);
+@import url(body.css);
+
+a {
+    text-decoration: none;
+    line-height: 14px;
+}
+
+.categories__title {
+    font-size: 32px;
+}
+
+.categories__list {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+
+.categories__list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 70px;
+    margin-bottom: 16px;
+}
+
+.categories__category-title {
+    font-size: 18px;
+}
+
+.fixed-button {
+    position: fixed;
+    bottom: 56px;
+    right: 56px;
+}
+
+.addCategory-link button {
+    cursor: pointer;
+}
