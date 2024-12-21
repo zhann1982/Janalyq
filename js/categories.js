@@ -10,9 +10,11 @@ async function fetchAndRenderCategories() {
                 <li class="categories__list-item">
                     <h4 class="categories__category-title">${category.name}</h4>
                     <div class="categories__actions">
-                        <button onclick="./edit-category.html?id=${category.id}" class="button button--blue button--small">
-                            Редактировать
-                        </button>
+                        <a href="./edit-category.html?id=${category.id}">
+                            <button class="button button--blue button--small">
+                                Редактировать
+                            </button>
+                        </a>
                         <button onclick="deleteCategory(${category.id})" class="button button--red button--small">
                             Удалить
                         </button>

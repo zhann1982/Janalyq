@@ -20,7 +20,7 @@ async function fetchAndRenderNews() {
                             ${news.title}
                         </h2>
                         <p class="news-card__attributes">
-                            ${news.createdAt.split(' ').shift()} • ${news.category.name || 'Категория'}
+                            ${new Date(news.createdAt).toLocaleDateString()} • ${news.category.name || 'Категория'}
                         </p>
                     </a>
                     <div>
