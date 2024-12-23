@@ -48,7 +48,7 @@
                 </div>
                 <p class="user__name">Администратор</p>
             </div>
-            <a href="./login.html" class="button button--red button--small">
+            <a href="#" class="button button--red button--small" onclick="logout()">
                 Выйти
             </a>
         </div>
@@ -56,8 +56,43 @@
 
     <main class="news">
        
-    </main>
+        <form action="" class="news__form">
 
+            <h2 class="news__form-title">
+                Редактирование новости
+            </h2>
+
+            <div class="form-element">
+                <label for="title">Название</label>
+                <input class="news__title indent" type="text" name="title" required>
+            </div>
+            
+            <div class="form-element">
+                <label for="category">Категория</label>
+                <select class="news__category indent" name="category" id="category">
+                    <option value="1">string1</option>
+                    <option value="2">Спорт</option>
+                    <option value="3">Политика</option>
+                </select>
+                <!-- <input class="news__category indent" type="text" name="category" required> -->
+            </div>
+
+            <div class="form-element">
+                <label for="image">Обложка</label>
+                <input class="news__image" type="file" name="image" required>
+            </div>
+
+            <div class="form-element">
+                <label for="content">Контент</label>
+                <textarea class="news__content" name="content" required></textarea>
+            </div>
+
+            <button class="button button--blue margin-inline-end">Сохранить изменения</button>
+
+        </form>
+
+    </main>
+    
     <script src="/js/edit-news.js"></script>
 </body>
 </html>

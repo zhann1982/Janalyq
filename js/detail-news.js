@@ -1,6 +1,13 @@
+document.onreadystatechange = () => {if (!localStorage.getItem('authToken'))  window.location.href = './index.html'}
+
 function getNewsIdFromUrl() {
     const params = new URLSearchParams(window.location.search)
     return params.get('id')
+}
+
+function logout() {
+    localStorage.removeItem('authToken')
+    window.location.href = './index.html'
 }
 
 // const newsId = getNewsIdFromUrl()

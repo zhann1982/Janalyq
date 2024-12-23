@@ -1,3 +1,5 @@
+document.onreadystatechange = () => {if (!localStorage.getItem('authToken'))  window.location.href = './index.html'}
+
 function getCategoryIdFromUrl() {
     const params = new URLSearchParams(window.location.search)
     return params.get('id')
@@ -5,6 +7,11 @@ function getCategoryIdFromUrl() {
 
 function submitEditCategory() {
 
+}
+
+function logout() {
+    localStorage.removeItem('authToken')
+    window.location.href = './index.html'
 }
 
 const BASE_URL = "https://webfinalapi.mobydev.kz"

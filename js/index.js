@@ -1,3 +1,5 @@
+
+
 const BASE_URL = "https://webfinalapi.mobydev.kz"
 
 async function fetchAndRenderNews() {
@@ -59,20 +61,42 @@ async function fetchAndRenderNews() {
     }    
 }
 
-function setupActionButtons() {
+async function setupActionButtons() {
     const authToken = localStorage.getItem('authToken')
     const headerAuth = document.querySelector('.header__auth')
 
     if (authToken) {
+
+        let userId, userName
+
+        try {
+            const response = await fetch('https://webfinalapi.mobydev.kz/user/profile', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'accept': 'application/json'
+                },
+            })
+    
+            if (response.ok) {
+                const user = await response.json()
+                userId = user.id
+                userName = user.name
+            }
+        } catch(error) {
+            console.error("Ошибка при авторизации: ", error)
+        }
+        
+        
         headerAuth.innerHTML = 
         `
          <div class="user">
             <div class="user__avatar">
                 <img 
-                    src="https://i.pravatar.cc/150?img=12" alt="Аватар"
+                    src="https://i.pravatar.cc/150?img=${userId}" alt="Аватар"
                 >
             </div>
-            <p class="user__name">Администратор</p>
+            <p class="user__name">${userName}</p>
         </div>
         <button 
             class="button button--red button--small"
@@ -134,19 +158,6 @@ document.querySelector('.header__nav-link__category').addEventListener('click', 
 function deleteNews() {
 
 }
-
-// async function getCurrentUser() {
-//     try {
-//         const response = await fetch(`${BASE_URL}/user/profile`)
-//         if (!response.ok) throw new Error(`Ошибка HTTP: ${response.status}`)
-
-//         const userData = await response.json()
-
-//         console.log(userData)
-//     } catch (error) {
-        
-//     }
-// }
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchAndRenderNews();

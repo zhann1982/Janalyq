@@ -13,13 +13,15 @@ document.querySelector('.main__form-login').addEventListener('submit', async (ev
         })
 
         if (response.ok) {
+
             const {token} = await response.json()
             localStorage.setItem('authToken', token)
-            window.location.href = './index.html'
+            window.location.href = `./index.html`
         }
     } catch(error) {
         console.error("Ошибка при авторизации: ", error)
     }
+
 })
 
 

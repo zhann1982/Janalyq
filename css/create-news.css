@@ -47,7 +47,8 @@ a {
         line-height: 22px;
     }
 
-    input, textarea {
+    input, textarea, select {
+        padding: 0;
         height: 56px;
         outline: 0px;
         border: 1px solid #E6E6E6;
@@ -56,7 +57,13 @@ a {
         font-size: 16px;
     }
 
-    input.indent {
+    textarea {
+        padding: 10px;
+        min-height: 274px;
+        resize: vertical;
+    }
+
+    .indent {
         text-indent: 10px;
     }
 }
@@ -76,8 +83,9 @@ input[type="file"].news__image::file-selector-button {
     font-size: 1rem;
     cursor: pointer;
     background-color: #0077B6;
+    margin-right: 15px;
 }
 
-.button {
+.margin-inline-end {
     margin-inline-end: auto;
 }
