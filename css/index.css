@@ -16,3 +16,13 @@
     grid-template-columns: 1fr 1fr;
     gap: 32px;
 }
+
+.fixed-button {
+    position: fixed;
+    bottom: 56px;
+    right: 56px;
+}
+
+.addCategory-link button {
+    cursor: pointer;
+}

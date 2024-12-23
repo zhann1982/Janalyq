@@ -53,9 +53,104 @@ async function fetchAndRenderNews() {
                 </div>
             </article>
         `).join('');
+        setupActionButtons();
     } catch (error) {
         console.error(`Ошибка при получении новостей: ${error}`)
     }    
 }
 
-document.addEventListener('DOMContentLoaded', fetchAndRenderNews)
+function setupActionButtons() {
+    const authToken = localStorage.getItem('authToken')
+    const headerAuth = document.querySelector('.header__auth')
+
+    if (authToken) {
+        headerAuth.innerHTML = 
+        `
+         <div class="user">
+            <div class="user__avatar">
+                <img 
+                    src="https://i.pravatar.cc/150?img=12" alt="Аватар"
+                >
+            </div>
+            <p class="user__name">Администратор</p>
+        </div>
+        <button 
+            class="button button--red button--small"
+            onclick="logout()"
+        >
+            Выйти
+        </button>
+        `
+    }
+
+    document.querySelectorAll('.new-card__actions a.button--blue').forEach(link => {
+        link.addEventListener('click', event => {
+            if (!authToken) {
+                event.preventDefault()
+                alert('Авторизуйтесь для редактирования.')
+            }
+        })
+    })
+
+    document.querySelectorAll('.new-card__actions button.button--red').forEach(link => {
+        link.addEventListener('click', event => {
+            if (!authToken) {
+                event.preventDefault()
+                alert('Авторизуйтесь для удаления.')
+            }
+        })
+    })
+}
+
+function displayCreateButton () {
+    if (localStorage.getItem('authToken')) {
+        const div = document.createElement('div')
+        div.className = "fixed-button"
+        div.innerHTML = `
+            <a href="./create-news.html" class="addCategory-link">
+                <button type="button" class="button-disk button--green">
+                    <img src="./img/plus-white.png" alt="Кнопка Добавить категорию">
+                </button>
+            </a>
+            ` 
+        document.body.appendChild(div)
+    }
+}
+
+function logout() {
+    localStorage.removeItem('authToken')
+    window.location.reload()
+}
+
+document.querySelector('.header__nav-link__category').addEventListener('click', (event) => {
+    if (localStorage.getItem('authToken')) {
+        window.location.href = './categories.html'
+    } else {
+        event.preventDefault()
+        alert('Авторизуйтесь для перехода на страницу с категориями.')
+    }
+})
+
+function deleteNews() {
+
+}
+
+// async function getCurrentUser() {
+//     try {
+//         const response = await fetch(`${BASE_URL}/user/profile`)
+//         if (!response.ok) throw new Error(`Ошибка HTTP: ${response.status}`)
+
+//         const userData = await response.json()
+
+//         console.log(userData)
+//     } catch (error) {
+        
+//     }
+// }
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchAndRenderNews();
+    displayCreateButton();
+    // getCurrentUser();
+})
+

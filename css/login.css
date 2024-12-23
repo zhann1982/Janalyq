@@ -10,7 +10,7 @@
     justify-content: center;
 }
 
-.main__login {
+.main__form-login {
     display: flex;
     flex-direction: column;
     gap: 32px;

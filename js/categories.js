@@ -26,5 +26,26 @@ async function fetchAndRenderCategories() {
     }    
 }
 
-document.addEventListener('DOMContentLoaded', fetchAndRenderCategories)
+function logout() {
+    localStorage.removeItem('authToken')
+    window.location.href = './index.html'
+}
+
+document.onreadystatechange = function(e) {
+
+    let token = localStorage.getItem('authToken')
+    if (document.readyState === 'complete') {
+
+        if (!token) {
+            document.body.innerHTML = ''
+            window.location.href = './index.html'
+        } else {
+            window.onload = function(e){
+                fetchAndRenderCategories()
+            }
+        }
+    }
+};
+
+
 

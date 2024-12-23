@@ -39,6 +39,8 @@
 
     display: flex;
     justify-content: end;
+    gap: 15px;
+    font-size: 14px;
 }
 
 .header__exit {
@@ -52,4 +54,5 @@
     a.button {
         height: 14px;
     }
+    font-size: 14px;
 }
