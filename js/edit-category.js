@@ -1,45 +1,74 @@
-document.onreadystatechange = () => {if (!localStorage.getItem('authToken'))  window.location.href = './index.html'}
+const authToken = localStorage.getItem('authToken')
+const BASE_URL = "https://webfinalapi.mobydev.kz"
+const params = new URLSearchParams(window.location.search)
+const id = params.get('id')
 
-function getCategoryIdFromUrl() {
-    const params = new URLSearchParams(window.location.search)
-    return params.get('id')
-}
 
-function submitEditCategory() {
-
-}
+document.onreadystatechange = () => {if (!authToken)  window.location.href = './index.html'}
 
 function logout() {
     localStorage.removeItem('authToken')
     window.location.href = './index.html'
 }
 
-const BASE_URL = "https://webfinalapi.mobydev.kz"
+function getCategoryIdFromURL() {
+    const params = new URLSearchParams(window.location.search)
+    return params.get('id')
+}
 
 async function fetchAndRenderCategoryName(categoryId) {
     try {
 
         const response = await fetch(`${BASE_URL}/categories/${categoryId}`)
-
         if (!response.ok) throw new Error(`Ошибка HTTP: ${response.status}`)
-
         const category = await response.json();
-
         document.querySelector('.category__name').value = category.name;
 
-
     } catch (error) {
-        console.error(`Ошибка при получении новости: ${error}`)
+        console.error(`Ошибка при получении категории: ${error}`)
     }    
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const categoryId = getCategoryIdFromUrl()
+    categoryId = getCategoryIdFromURL()
     if (categoryId) {
         fetchAndRenderCategoryName(categoryId)
     } else {
-        console.error('ID новости не найден в URL')
+        console.error('ID категории не найден в URL')
+    }
+})
+
+document.querySelector('.category__container').addEventListener('submit', async (event) => {
+    event.preventDefault()
+
+    const name = document.querySelector('.category__name').value
+
+    if (!name) {
+        alert('Пожалуйста, заполните все поля')
+        return;
     }
 
-    submitEditCategory()
+
+    try {
+        const id = getCategoryIdFromURL()
+        const response = await fetch(`${BASE_URL}/category/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization':`Bearer ${authToken}`,
+                'accept': 'application/json',  
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({id, name})
+        })
+
+        if (response.ok) {
+            alert('Категория успешно обновлена')
+            window.location.href = './categories.html'
+        } else {
+            const errorResponse = await response.json()
+            alert('Ошибка при обновлении категории: ', (errorResponse.message || 'Проверьте данные'))
+        }
+    } catch(error) {
+        console.error("Ошибка: ", error)
+    }
 })

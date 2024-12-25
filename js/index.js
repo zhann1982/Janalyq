@@ -1,4 +1,9 @@
+const authToken = localStorage.getItem('authToken')
 
+function logout() {
+    localStorage.removeItem('authToken')
+    window.location.reload()
+}
 
 const BASE_URL = "https://webfinalapi.mobydev.kz"
 
@@ -62,7 +67,7 @@ async function fetchAndRenderNews() {
 }
 
 async function setupActionButtons() {
-    const authToken = localStorage.getItem('authToken')
+    
     const headerAuth = document.querySelector('.header__auth')
 
     if (authToken) {
@@ -70,7 +75,7 @@ async function setupActionButtons() {
         let userId, userName
 
         try {
-            const response = await fetch('https://webfinalapi.mobydev.kz/user/profile', {
+            const response = await fetch(`${BASE_URL}/user/profile`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${authToken}`,
@@ -127,7 +132,7 @@ async function setupActionButtons() {
 }
 
 function displayCreateButton () {
-    if (localStorage.getItem('authToken')) {
+    if (authToken) {
         const div = document.createElement('div')
         div.className = "fixed-button"
         div.innerHTML = `
@@ -141,13 +146,8 @@ function displayCreateButton () {
     }
 }
 
-function logout() {
-    localStorage.removeItem('authToken')
-    window.location.reload()
-}
-
 document.querySelector('.header__nav-link__category').addEventListener('click', (event) => {
-    if (localStorage.getItem('authToken')) {
+    if (authToken) {
         window.location.href = './categories.html'
     } else {
         event.preventDefault()
@@ -162,6 +162,5 @@ function deleteNews() {
 document.addEventListener('DOMContentLoaded', () => {
     fetchAndRenderNews();
     displayCreateButton();
-    // getCurrentUser();
 })
 

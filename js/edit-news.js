@@ -1,13 +1,16 @@
-document.onreadystatechange = () => {if (!localStorage.getItem('authToken'))  window.location.href = './index.html'}
+const authToken = localStorage.getItem('authToken')
+const BASE_URL = "https://webfinalapi.mobydev.kz"
+
+document.onreadystatechange = () => {if (!authToken)  window.location.href = './index.html'}
 
 function logout() {
     localStorage.removeItem('authToken')
     window.location.href = './index.html'
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
 
-    const authToken = localStorage.getItem('authToken')
+
+document.addEventListener('DOMContentLoaded', async () => {
 
     const urlParams = new URLSearchParams(window.location.search)
     const newsId = urlParams.get('id')
@@ -15,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (newsId) {
         try {
 
-            const response = await fetch(`https://webfinalapi.mobydev.kz/news/${newsId}`)
+            const response = await fetch(`${BASE_URL}/news/${newsId}`)
             if (response.ok) {
                 const newsData = await response.json();
 
@@ -31,6 +34,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error(`Ошибка: ${error}`)
         }  
     }
+
+    
 
     document.querySelector('.news__form').addEventListener('submit', async (event) => {
         event.preventDefault()
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         formData.append('thumbnail', thumbnail)
     
         try {
-            const response = await fetch(`https://webfinalapi.mobydev.kz/news/${newsId}`, {
+            const response = await fetch(`${BASE_URL}/news/${newsId}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization':`Bearer ${authToken}` 

@@ -1,4 +1,7 @@
-document.onreadystatechange = () => {if (!localStorage.getItem('authToken'))  window.location.href = './index.html'}
+const authToken = localStorage.getItem('authToken')
+const BASE_URL = "https://webfinalapi.mobydev.kz"
+
+document.onreadystatechange = () => {if (!authToken)  window.location.href = './index.html'}
 
 function getNewsIdFromUrl() {
     const params = new URLSearchParams(window.location.search)
@@ -10,9 +13,6 @@ function logout() {
     window.location.href = './index.html'
 }
 
-// const newsId = getNewsIdFromUrl()
-
-const BASE_URL = "https://webfinalapi.mobydev.kz"
 
 async function fetchAndRenderNewsById(newsId) {
     try {

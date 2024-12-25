@@ -1,12 +1,12 @@
+const authToken = localStorage.getItem('authToken')
+const BASE_URL = "https://webfinalapi.mobydev.kz"
 
-document.onreadystatechange = () => {if (!localStorage.getItem('authToken'))  window.location.href = './index.html'}
+document.onreadystatechange = () => {if (!authToken)  window.location.href = './index.html'}
     
 function logout() {
     localStorage.removeItem('authToken')
     window.location.href = './index.html'
 }
-
-const authToken = localStorage.getItem('authToken')
 
 document.querySelector('.button--blue').addEventListener('click', async (event) => {
     event.preventDefault()
@@ -28,7 +28,7 @@ document.querySelector('.button--blue').addEventListener('click', async (event) 
     formData.append('thumbnail', thumbnail)
 
     try {
-        const response = await fetch('https://webfinalapi.mobydev.kz/news', {
+        const response = await fetch(`${BASE_URL}/news`, {
             method: 'POST',
             headers: {
                 'Authorization':`Bearer ${authToken}`,

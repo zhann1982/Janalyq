@@ -1,4 +1,27 @@
+const authToken = localStorage.getItem('authToken')
 const BASE_URL = "https://webfinalapi.mobydev.kz"
+
+document.onreadystatechange = function(e) {
+    if (document.readyState === 'complete') {
+        if (!authToken) {
+            document.body.innerHTML = ''
+            window.location.href = './index.html'
+        } else {
+            window.onload = function(e){
+                fetchAndRenderCategories()
+            }
+        }
+    }
+};
+
+function logout() {
+    localStorage.removeItem('authToken')
+    window.location.href = './index.html'
+}
+
+function deleteCategory(id) {
+    
+}
 
 async function fetchAndRenderCategories() {
     try {
@@ -24,28 +47,28 @@ async function fetchAndRenderCategories() {
     } catch (error) {
         console.error(`Ошибка при получении списка категории: ${error}`)
     }    
-}
 
-function logout() {
-    localStorage.removeItem('authToken')
-    window.location.href = './index.html'
-}
+    try {
+        const response = await fetch('https://webfinalapi.mobydev.kz/user/profile', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'accept': 'application/json'
+            },
+        })
 
-document.onreadystatechange = function(e) {
+        if (response.ok) {
+            const user = await response.json()
 
-    let token = localStorage.getItem('authToken')
-    if (document.readyState === 'complete') {
-
-        if (!token) {
-            document.body.innerHTML = ''
-            window.location.href = './index.html'
-        } else {
-            window.onload = function(e){
-                fetchAndRenderCategories()
-            }
+            document.querySelector('.user__avatar img').src = `https://i.pravatar.cc/150?img=${user.id}`
+            document.querySelector('.user__name').innerText = user.name
         }
+    } catch(error) {
+        console.error("Ошибка при авторизации: ", error)
     }
-};
+}
+
+
 
 
 
