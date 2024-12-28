@@ -60,7 +60,27 @@ async function fetchAndRenderNewsById(newsId) {
         document.querySelector('.news__image').src = `${BASE_URL}${news.thumbnail}`;
         document.querySelector('.news__content').textContent = news.content;
         document.querySelector('.user__avatar-img').src = `https://i.pravatar.cc/150?img=${news.author.id}`;
-        document.querySelector('.addCategory-link').href = `./edit-news.html?id=${newsId}`;
+        if (authToken) {
+            document.querySelector('.addCategory-link').href = `./edit-news.html?id=${newsId}`;
+        } else {
+            const buttonEdit  = document.querySelector('.buttonEdit')
+            const buttonDelete  = document.querySelector('.buttonDelete')
+
+            buttonEdit.style.background = "#C9C9C9"
+            buttonDelete.style.background = "#C9C9C9"
+
+            buttonEdit.addEventListener('click', (e) => {
+                e.preventDefault()
+                alert('Авторизуйтесь для редактирования новости')
+            })
+
+            const categoriesLink  = document.querySelector('.categoriesLink')
+            categoriesLink.href = '#'
+            categoriesLink.addEventListener('click', (e) => {
+                e.preventDefault()
+                alert('Требуется авторизация!')
+            })
+        }
 
     } catch (error) {
         console.error(`Ошибка при получении новости: ${error}`)
@@ -129,7 +149,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             Выйти
         </button>
         `
-    }
+    } 
 
     if (newsId) {
         fetchAndRenderNewsById(newsId)
@@ -137,3 +157,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('ID новости не найден в URL')
     }
 })
+
