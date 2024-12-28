@@ -4,7 +4,6 @@ const BASE_URL = "https://webfinalapi.mobydev.kz"
 document.onreadystatechange = function(e) {
     if (document.readyState === 'complete') {
         if (!authToken) {
-            document.body.innerHTML = ''
             window.location.href = './index.html'
         } else {
             window.onload = function(e){
@@ -19,7 +18,34 @@ function logout() {
     window.location.href = './index.html'
 }
 
-function deleteCategory(id) {
+async function deleteCategory(id) {
+
+    if (!authToken) {
+        alert('Авторизуйтесь для удаления категории')
+        return;
+    }
+
+    const isConfirmed = confirm('Вы уверены что хотите удалить данную категорию')
+    if (!isConfirmed) return
+
+    try {
+        const response = await fetch(`${BASE_URL}/category/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'accept': 'application/json',
+                    'Authorization': `Bearer ${authToken}`                    
+                }
+        })
+
+        if (response.ok) {
+            alert('Категория успешно удалена.')
+            window.location.reload()
+        } else {
+            alert('Ошибка при удалении категории.')
+        }
+    } catch (error) {
+        console.error('Ошибка: ', error)
+    }
     
 }
 

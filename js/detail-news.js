@@ -1,7 +1,38 @@
 const authToken = localStorage.getItem('authToken')
 const BASE_URL = "https://webfinalapi.mobydev.kz"
 
-// document.onreadystatechange = () => {if (!authToken)  window.location.href = './index.html'}
+const newsId = getNewsIdFromUrl()
+
+async function delete_News() {
+
+    if (!authToken) {
+        alert('Авторизуйтесь для удаления новости')
+        return;
+    }
+
+    const isConfirmed = confirm('Вы уверены что хотите удалить данную новость')
+    if (!isConfirmed) return
+
+    try {
+        const response = await fetch(`${BASE_URL}/news/${newsId}`, {
+                method: "DELETE",
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'accept': 'application/json'
+                }
+        })
+
+        if (response.ok) {
+            alert('Новость успешно удалена.')
+            window.location.href = "./index.html"
+        } else {
+            alert('Ошибка при удалении новости.')
+        }
+    } catch (error) {
+        console.error('Ошибка: ', error)
+    }
+    
+}
 
 function getNewsIdFromUrl() {
     const params = new URLSearchParams(window.location.search)
@@ -100,7 +131,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         `
     }
 
-    const newsId = getNewsIdFromUrl()
     if (newsId) {
         fetchAndRenderNewsById(newsId)
     } else {

@@ -1,8 +1,7 @@
 const BASE_URL = "https://webfinalapi.mobydev.kz"
 const authToken = localStorage.getItem('authToken')
 
-async function deleteNews(id) {
-    console.log(id)
+async function delete_News(id) {
 
     if (!authToken) {
         alert('Авторизуйтесь для удаления новости')
@@ -84,7 +83,7 @@ async function fetchAndRenderNews() {
                             <button
                                 type="button"
                                 class="button button--red button--small buttonDelete"
-                                onclick="deleteNews(${news.id})"
+                                onclick="delete_News(${news.id})"
                                 data-id="${news.id}"
                             >
                                 Удалить
@@ -197,12 +196,3 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAndRenderNews();
     displayCreateButton();
 })
-
-// buttons = document.querySelectorAll('.buttonDelete')
-// console.log(buttons)
-// buttons.map(button => {
-//     button.addEventListener('click', event => {
-//         const id = event.target.getAttribute('data-id')
-//         deleteNews(id)
-//     })
-// })
