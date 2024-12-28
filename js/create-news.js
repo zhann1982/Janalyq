@@ -47,3 +47,61 @@ document.querySelector('.button--blue').addEventListener('click', async (event) 
         console.error("Ошибка: ", error)
     }
 })
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    document.querySelector('.news__title').value = ''
+    document.querySelector('.news__content').value = ''
+    document.querySelector('.news__category').value = ''
+    document.querySelector('.news__image').files[0] = null
+
+    try {
+        const response = await fetch(`${BASE_URL}/user/profile`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'accept': 'application/json'
+            }
+        })
+
+        if (response.ok) {
+            const user = await response.json()
+
+            document.querySelector('.user__avatar img').src = `https://i.pravatar.cc/150?img=${user.id}`
+            document.querySelector('.user__name').innerText = user.name
+        }
+    } catch(error) {
+        console.error("Ошибка при авторизации: ", error)
+    }
+
+    const selectInput = document.querySelector('.news__category')
+    const optionTag = document.createElement('option')
+    optionTag.value = 0
+    optionTag.textContent = ""
+    selectInput.appendChild(optionTag)
+    console.log(selectInput.selectedIndex, selectInput)
+
+    try {
+        const response = await fetch(`${BASE_URL}/categories`, {
+            method: 'GET',
+            headers: {
+                'accept': 'application/json'
+            }
+        })
+        if (!response.ok) throw new Error(`Ошибка HTTP: ${response.status}`)
+
+        const categoriesArray = await response.json()
+        categoriesArray.map(category => {
+            // const optionTag = `<option value="${category.id}">${category.name}</option>`
+            const optionTag = document.createElement('option')
+            optionTag.value = category.id
+            optionTag.textContent = category.name
+            selectInput.appendChild(optionTag)
+        });
+        
+    } catch (error) {
+        console.error(`Ошибка при получении списка категории: ${error}`)
+    }  
+
+    
+})

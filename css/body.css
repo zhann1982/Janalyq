@@ -6,3 +6,7 @@ body {
     max-width: 1328px;
     margin-inline: auto;
 }
+
+.d-none {
+    display: none;
+}

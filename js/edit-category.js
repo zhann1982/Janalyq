@@ -48,15 +48,13 @@ document.querySelector('.category__container').addEventListener('submit', async 
         return;
     }
 
-
     try {
         const id = getCategoryIdFromURL()
         const response = await fetch(`${BASE_URL}/category/${id}`, {
             method: 'PUT',
             headers: {
                 'Authorization':`Bearer ${authToken}`,
-                'accept': 'application/json',  
-                'Content-Type': 'application/json' 
+                'accept': 'application/json' 
             },
             body: JSON.stringify({id, name})
         })
@@ -70,5 +68,26 @@ document.querySelector('.category__container').addEventListener('submit', async 
         }
     } catch(error) {
         console.error("Ошибка: ", error)
+    }
+})
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/profile`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'accept': 'application/json'
+            },
+        })
+
+        if (response.ok) {
+            const user = await response.json()
+
+            document.querySelector('.user__avatar img').src = `https://i.pravatar.cc/150?img=${user.id}`
+            document.querySelector('.user__name').innerText = user.name
+        }
+    } catch(error) {
+        console.error("Ошибка при авторизации: ", error)
     }
 })

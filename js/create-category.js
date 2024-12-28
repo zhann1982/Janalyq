@@ -43,3 +43,23 @@ document.querySelector('.button--blue').addEventListener('click', async (event) 
     }
 })
 
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/profile`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'accept': 'application/json'
+            },
+        })
+
+        if (response.ok) {
+            const user = await response.json()
+
+            document.querySelector('.user__avatar img').src = `https://i.pravatar.cc/150?img=${user.id}`
+            document.querySelector('.user__name').innerText = user.name
+        }
+    } catch(error) {
+        console.error("Ошибка при авторизации: ", error)
+    }
+})

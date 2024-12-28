@@ -1,11 +1,44 @@
+const BASE_URL = "https://webfinalapi.mobydev.kz"
 const authToken = localStorage.getItem('authToken')
+
+async function deleteNews(id) {
+    console.log(id)
+
+    if (!authToken) {
+        alert('Авторизуйтесь для удаления новости')
+        return;
+    }
+
+    const isConfirmed = confirm('Вы уверены что хотите удалить данную новость')
+    if (!isConfirmed) return
+
+    try {
+        const response = await fetch(`${BASE_URL}/news/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'accept': 'application/json'
+                }
+        })
+
+        if (response.ok) {
+            alert('Новость успешно удалена.')
+            fetchAndRenderNews()
+        } else {
+            alert('Ошибка при удалении новости.')
+        }
+    } catch (error) {
+        console.error('Ошибка: ', error)
+    }
+    
+}
 
 function logout() {
     localStorage.removeItem('authToken')
     window.location.reload()
 }
 
-const BASE_URL = "https://webfinalapi.mobydev.kz"
+
 
 async function fetchAndRenderNews() {
     try {
@@ -50,8 +83,9 @@ async function fetchAndRenderNews() {
                             </a>
                             <button
                                 type="button"
-                                class="button button--red button--small"
+                                class="button button--red button--small buttonDelete"
                                 onclick="deleteNews(${news.id})"
+                                data-id="${news.id}"
                             >
                                 Удалить
                             </button>
@@ -164,3 +198,11 @@ document.addEventListener('DOMContentLoaded', () => {
     displayCreateButton();
 })
 
+// buttons = document.querySelectorAll('.buttonDelete')
+// console.log(buttons)
+// buttons.map(button => {
+//     button.addEventListener('click', event => {
+//         const id = event.target.getAttribute('data-id')
+//         deleteNews(id)
+//     })
+// })
