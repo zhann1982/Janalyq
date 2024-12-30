@@ -76,3 +76,33 @@ a {
     flex-direction: column;
     gap: 10px;
 }
+
+@media (max-width: 630px) {
+    .news__container {
+        max-width: 500px;
+    }
+
+    .news__info {
+        & > * {
+            border: 1px solid #E6E6E6;
+            border-radius: 6px;
+            height: 36px;
+            margin: 0;
+            padding-inline: 9px;
+        }
+    
+        p {
+            line-height: 36px;
+        }
+    }
+}
+
+@media (max-width: 1050px) {
+    .fixed-buttons {
+        position: inherit;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        gap: 10px;
+    }
+}

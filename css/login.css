@@ -75,4 +75,52 @@
 }
 
 
+@media (max-width: 540px) {
+    .main__form-login {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width:360px;
+        padding: 36px 24px;
+        border: 1px solid #E6E6E6;
+        border-radius: 24px;
+    }
+    
+    .main__inputs {
+        display: flex;
+        flex-direction: column;
+    
+        label {
+            color: #707070;
+            font-size: 14px;
+            line-height: 22px;
+        }
+    }
+    
+    .main__inputs input {
+        height: 36px;
+        outline: 0px;
+        border: 1px solid #E6E6E6;
+        border-radius: 8px;
+        color: #707070;
+        text-indent: 10px;
+        font-size: 16px;
+    }
+    
+    .main__email::placeholder {
+        text-indent: 10px;
+        color: #BDBDBD;
+        font-size: 16px;
+    }
+    
+    .main__password::placeholder {
+        text-indent: 10px;
+        color: #BDBDBD;
+        font-size: 16px;
+    }
+    
+    .main__email {
+        margin-bottom: 18px;
+    }
 
+}

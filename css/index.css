@@ -26,3 +26,27 @@
 .addCategory-link button {
     cursor: pointer;
 }
+
+@media (max-width: 780px) {
+    .header__user {
+        display: none;
+    }
+    .fixed-buttons {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+    }
+    .fixed-button {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .news-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}

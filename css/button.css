@@ -44,3 +44,67 @@
 .button-stretched {
     width: 100%;
 }
+
+@media (max-width: 670px) {
+    .button {
+        padding: 8px 16px 8px 16px;
+        height: 36px;
+        border-radius: 6px;
+        color: #fff;
+        text-decoration: none;
+        outline: 0px;
+        border: 0px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    
+    .button--small {
+        height: 32px;
+        font-size: 14px;
+        line-height: 14px;
+    }
+    
+    .button--blue {
+        background-color: #0077B6;
+    }
+    
+    .button--red {
+        background-color: #C1121F;
+    }
+    
+    .button--green {
+        background-color: #52B788;
+    }
+    
+    .button-disk {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 0;
+        padding-top: 5px;
+    
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+    
+    .button-stretched {
+        width: 100%;
+    }
+}
+
+@media (max-width: 780px) {
+    .button-disk {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 0;
+        padding-top: 5px;
+    
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}

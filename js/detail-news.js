@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         headerAuth.innerHTML = 
         `
-         <div class="user">
+         <div class="user header__user">
             <div class="user__avatar">
                 <img 
                     src="https://i.pravatar.cc/150?img=${userId}" alt="Аватар"
